@@ -202,12 +202,12 @@ async function handleCommand(rawInput) {
     
     if (cmd === "help") {
       await printSequence([
-        "HELP          Provides help for commands.",
-        "SELFCHECK     Performs a System self-check.",
-        "STATIC        Displays and manages static variables.",
-        "RAISASERVICE  Enters Raisa Service for all document needs.",
-        "EXIT          Exits the OS.",
-        "CLEAR         Clears the OS log."
+        "HELP              Provides help for commands.",
+        "SELFCHECK         Performs a System self-check.",
+        "STATIC            Displays and manages static variables.",
+        "RAISASERVICE      Enters Raisa Service for all document needs.",
+        "EXIT              Exits the OS.",
+        "CLEAR             Clears the OS log."
       ]);
     } else if (cmd === "selfcheck") {
       await printSequence([
@@ -341,6 +341,7 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex--;
       cliInput.value = commandHistory[historyIndex];
     }
+    playKeySound(); // Plays sound for ArrowUp
   } else if (e.key === "ArrowDown") {
     e.preventDefault();
     if (historyIndex < commandHistory.length - 1) {
@@ -350,9 +351,12 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex = commandHistory.length;
       cliInput.value = "";
     }
-  } else if (e.key !== "F5") {
+    playKeySound(); // Plays sound for ArrowDown
+  } else if (e.key.length === 1 || e.key === "Backspace") {
+    // Plays sound ONLY for single printable characters and Backspace
     playKeySound();
   }
+  // Left/Right arrows, Shift, Ctrl, Alt, CapsLock, F-keys, etc. are silently ignored
 });
 
 window.addEventListener("keydown", async (e) => {
