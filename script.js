@@ -186,6 +186,7 @@ async function handleCommand(rawInput) {
     
     currentMode = "root";
     const postLoginInstructions = [
+      " ", 
       "Press the [Up] and [Down] arrow keys to reference previous/later commands",
       "Type a command or type 'help' for a list of commands.",
       "Type 'exit' to exit the OS."
