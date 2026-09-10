@@ -178,7 +178,7 @@ async function handleCommand(rawInput) {
       passLabel.textContent += "•";
       playKeySound();
       // Increase this number for a slower, more deliberate typing pace
-      await sleep(180);
+      await sleep(150);
     }
 
     await sleep(400);
