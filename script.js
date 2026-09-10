@@ -162,9 +162,9 @@ async function handleCommand(rawInput) {
 
 // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
   if (currentMode === "login_clearance") {
-    // Check if input consists strictly of a single digit between 1 and 5
-    if (!/^[1-5]$/.test(trimmed)) {
-      appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 1 to 5.");
+    // Check if input consists strictly of a single digit between 0 and 5
+    if (!/^[0-5]$/.test(trimmed)) {
+      appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
       showPrompt();
       return;
     }
