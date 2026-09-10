@@ -340,6 +340,7 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex--;
       cliInput.value = commandHistory[historyIndex];
     }
+    playKeySound(); // Plays sound for ArrowUp
   } else if (e.key === "ArrowDown") {
     e.preventDefault();
     if (historyIndex < commandHistory.length - 1) {
@@ -349,17 +350,12 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex = commandHistory.length;
       cliInput.value = "";
     }
-  } else {
-    // List keys that should NOT trigger the mechanical audio sound
-    const ignoredKeys = [
-      "Control", "Shift", "Alt", "Meta", "CapsLock", "Tab", "Escape", 
-      "F5", "F12", "Pause", "Insert", "Home", "PageUp", "PageDown", "End"
-    ];
-
-    if (!ignoredKeys.includes(e.key)) {
-      playKeySound();
-    }
+    playKeySound(); // Plays sound for ArrowDown
+  } else if (e.key.length === 1 || e.key === "Backspace") {
+    // Plays sound ONLY for single printable characters and Backspace
+    playKeySound();
   }
+  // Left/Right arrows, Shift, Ctrl, Alt, CapsLock, F-keys, etc. are silently ignored
 });
 
 window.addEventListener("keydown", async (e) => {
