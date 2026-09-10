@@ -292,7 +292,8 @@ async function handleCommand(rawInput) {
       }
     } else if (cmd === "open" || cmd === "cat") {
       if (!arg) {
-        await printSequence(["Usage: open <document_name>"]);
+        // Dynamically displays 'Usage: open <document_name>' or 'Usage: cat <document_name>'
+        await printSequence([`Usage: ${cmd} <document_name>`]);
         return;
       }
       if (DOCUMENTS[arg]) {
@@ -319,7 +320,15 @@ async function handleCommand(rawInput) {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
     } else if (cmd === "share" || cmd === "unshare") {
-      await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+      if (!arg) {
+        await printSequence([`Usage: ${cmd} <document_name>`]);
+      } else if (!DOCUMENTS[arg]) {
+        // Point 5 fix: Checks if document exists FIRST
+        await printSequence([`ERROR: Document '${arg}' not found.`]);
+      } else {
+        // Point 5 fix: Only triggers if document exists
+        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+      }
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
