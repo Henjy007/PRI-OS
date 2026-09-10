@@ -118,7 +118,7 @@ function showPrompt() {
   inputLine.classList.remove("hidden");
   cliInput.value = "";
   cliInput.focus();
-  playReadySound();
+  playKeySound();
 }
 
 // ==========================================
