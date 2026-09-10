@@ -10,20 +10,16 @@ let historyIndex = -1;
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-function playKeySound() {
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.type = 'square';
-  osc.frequency.setValueAtTime(400 + Math.random() * 200, audioCtx.currentTime);
-  gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.03);
-}
+JavaScript
+// Load your uploaded audio file
+const keyAudio = new Audio('click.mp3'); 
 
+function playKeySound() {
+  // Cloning the audio node lets keys play rapidly on top of each other without cutting off
+  const soundClone = keyAudio.cloneNode(); 
+  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.play().catch(() => {}); // Prevents browser console errors
+}
 function playReadySound() {
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const osc = audioCtx.createOscillator();
