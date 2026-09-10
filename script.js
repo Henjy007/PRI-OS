@@ -130,7 +130,7 @@ async function runBootSequence() {
     "Paragon OS. v2.3.11786 (c) 1982 Generative OS. All rights reserved. Licensed under the MIT License.",
     "Property of the Paragon Research Institute.",
     "[ DEUS EX MACHINA ]",
-    ""
+    " "
   ];
   await printSequence(bootText, 80);
 }
