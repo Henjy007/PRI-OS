@@ -160,7 +160,7 @@ async function handleCommand(rawInput) {
     return;
   }
 
-  // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
+// LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
   if (currentMode === "login_clearance") {
     let clearanceNum = parseInt(trimmed, 10);
     if (isNaN(clearanceNum) || clearanceNum < 1 || clearanceNum > 5) {
@@ -168,8 +168,21 @@ async function handleCommand(rawInput) {
     }
     currentClearance = clearanceNum.toString();
 
-    appendLine("Please insert password: ••••••••••••");
-    await sleep(600);
+    // Stream the password prompt label
+    const passLabel = document.createElement("div");
+    passLabel.className = "line";
+    passLabel.textContent = "Please insert password: ";
+    outputLog.appendChild(passLabel);
+
+    // Stream characters one by one with keypress audio
+    const passwordLength = 12;
+    for (let i = 0; i < passwordLength; i++) {
+      passLabel.textContent += "•";
+      playKeySound();
+      await sleep(60); // Speed of character typing (60ms)
+    }
+
+    await sleep(400);
     appendLine("AUTHENTICATING... SUCCESS");
     appendLine("");
     
