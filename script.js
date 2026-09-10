@@ -10,7 +10,6 @@ let historyIndex = -1;
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-JavaScript
 // Load your uploaded audio file
 const keyAudio = new Audio('366f2799-7060-488e-9d1b-f8852a946afd-render.mp3'); 
 
