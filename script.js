@@ -177,7 +177,7 @@ async function handleCommand(rawInput) {
     for (let i = 0; i < passwordLength; i++) {
       passLabel.textContent += "•";
       playKeySound();
-      await sleep(60);
+      await sleep(180);
     }
 
     await sleep(400);
