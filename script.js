@@ -259,7 +259,7 @@ async function handleCommand(rawInput) {
     return;
   }
 
-  // RAISA SUBSYSTEM MODE
+// RAISA SUBSYSTEM MODE
   if (currentMode === "raisa") {
     const parts = trimmed.split(" ");
     const cmd = parts[0].toLowerCase();
@@ -267,14 +267,14 @@ async function handleCommand(rawInput) {
 
     if (cmd === "help") {
       await printSequence([
-        "exit      Exits Raisa Service.",
-        "help      Recieve a list of commands",
-        "open      Open a document by name.",
-        "cat       Open a document by name.",
-        "share     Shares a document to a specified personnel.",
-        "unshare   Unshares a document to a specified personnel.",
-        "ls        Lists all available documents that you have clearance to.",
-        "access    View all personnel that have access to a file."
+        "exit         Exits Raisa Service.",
+        "help         Recieve a list of commands",
+        "open         Open a document by name.",
+        "cat          Open a document by name.",
+        "share        Shares a document to a specified personnel.",
+        "unshare      Unshares a document to a specified personnel.",
+        "ls           Lists all available documents that you have clearance to.",
+        "access       View all personnel that have access to a file."
       ]);
     } else if (cmd === "exit") {
       currentMode = "root";
@@ -293,7 +293,8 @@ async function handleCommand(rawInput) {
       }
     } else if (cmd === "open" || cmd === "cat") {
       if (!arg) {
-        await printSequence(["Usage: open <document_name>"]);
+        // Dynamically displays 'Usage: open <document_name>' or 'Usage: cat <document_name>'
+        await printSequence([`Usage: ${cmd} <document_name>`]);
         return;
       }
       if (DOCUMENTS[arg]) {
@@ -320,7 +321,15 @@ async function handleCommand(rawInput) {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
     } else if (cmd === "share" || cmd === "unshare") {
-      await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+      if (!arg) {
+        await printSequence([`Usage: ${cmd} <document_name>`]);
+      } else if (!DOCUMENTS[arg]) {
+        // Point 5 fix: Checks if document exists FIRST
+        await printSequence([`ERROR: Document '${arg}' not found.`]);
+      } else {
+        // Point 5 fix: Only triggers if document exists
+        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+      }
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
