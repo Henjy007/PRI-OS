@@ -162,11 +162,14 @@ async function handleCommand(rawInput) {
 
 // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
   if (currentMode === "login_clearance") {
-    let clearanceNum = parseInt(trimmed, 10);
-    if (isNaN(clearanceNum) || clearanceNum < 1 || clearanceNum > 5) {
-      clearanceNum = 1;
+    // Check if input consists strictly of a single digit between 1 and 5
+    if (!/^[1-5]$/.test(trimmed)) {
+      appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 1 to 5.");
+      showPrompt();
+      return;
     }
-    currentClearance = clearanceNum.toString();
+
+    currentClearance = trimmed;
 
     // Stream the password prompt label
     const passLabel = document.createElement("div");
@@ -179,7 +182,7 @@ async function handleCommand(rawInput) {
     for (let i = 0; i < passwordLength; i++) {
       passLabel.textContent += "•";
       playKeySound();
-      await sleep(60); // Speed of character typing (60ms)
+      await sleep(60);
     }
 
     await sleep(400);
@@ -195,7 +198,7 @@ async function handleCommand(rawInput) {
     await printSequence(postLoginInstructions, 60);
     return;
   }
-
+  
   // ROOT MODE
   if (currentMode === "root") {
     const cmd = trimmed.toLowerCase();
