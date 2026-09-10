@@ -202,12 +202,12 @@ async function handleCommand(rawInput) {
     
     if (cmd === "help") {
       await printSequence([
-        "HELP          Recieve a list of commands.",
-        "SELFCHECK     Perform a full system check.",
-        "STATIC        Advance to next prompt line.",
-        "RAISASERVICE  Enters Raisa Service.",
-        "EXIT          Exits the Operating System.",
-        "CLEAR         Clears the terminal screen."
+        "HELP          Provides help for commands.",
+        "SELFCHECK     Performs a System self-check.",
+        "STATIC        Displays and manages static variables.",
+        "RAISASERVICE  Enters Raisa Service for all document needs.",
+        "EXIT          Exits the OS.",
+        "CLEAR         Clears the OS log."
       ]);
     } else if (cmd === "selfcheck") {
       await printSequence([
