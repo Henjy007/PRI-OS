@@ -142,7 +142,13 @@ async function handleCommand(rawInput) {
   const trimmed = rawInput.trim();
   appendLine(`${promptSpan.textContent}${rawInput}`);
   
-  if (trimmed.length > 0 && currentMode !== "login_user" && currentMode !== "login_clearance") {
+  // 1. Save to history ONLY if not in login mode AND not 'exit'
+  if (
+    trimmed.length > 0 && 
+    currentMode !== "login_user" && 
+    currentMode !== "login_clearance" &&
+    trimmed.toLowerCase() !== "exit" // <--- ADD THIS EXCLUSION
+  ) {
     commandHistory.push(rawInput);
     historyIndex = commandHistory.length;
   }
@@ -381,4 +387,20 @@ document.getElementById("terminal").addEventListener("click", () => {
   }
 });
 
+// 1. Boots up the terminal automatically when the web page first loads
 window.addEventListener("DOMContentLoaded", runBootSequence);
+
+// 2. Turns the PC back on when any key is pressed after an 'exit' shutdown
+window.addEventListener("keydown", (e) => {
+  if (currentMode === "off") {
+    currentMode = "login_user";
+    outputLog.innerHTML = "";
+    
+    // Points ArrowUp directly to the last valid command (excluding 'exit')
+    historyIndex = commandHistory.length; 
+    
+    cliInput.disabled = false;
+    cliInput.value = "";
+    showPrompt();
+  }
+});
