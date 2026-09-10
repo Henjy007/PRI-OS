@@ -247,20 +247,34 @@ async function handleCommand(rawInput) {
       outputLog.innerHTML = "";
       await sleep(2000);
       showPrompt();
-    } else if (cmd === "exit") {
-      await printSequence([
-        "Exiting Operating System...",
-        "Locking Session...",
-        { type: "pause", duration: 1500 },
-        "SYSTEM SHUTDOWN COMPLETE"
-      ]);
-      await sleep(1500);
-      outputLog.innerHTML = "";
-      currentMode = "off";
-      appendLine("Press any key to turn the PC back on.");
-    } else {
-      await printSequence([`ERROR: Command '${trimmed}' not found.`]);
+  } else if (cmd === "exit") {
+    // 1. Hide input line and disable typing immediately
+    inputLine.classList.add("hidden");
+    cliInput.disabled = true;
+
+    // 2. Add 'exit' to command history if it isn't added automatically elsewhere
+    if (commandHistory[commandHistory.length - 1] !== "exit") {
+      commandHistory.push("exit");
     }
+
+    // 3. Display shutdown sequence
+    await printSequence([
+      "Exiting Operating System...",
+      "Locking Session...",
+      "SYSTEM SHUTDOWN COMPLETE"
+    ]);
+
+    // 4. Keep text visible on screen for 3 seconds
+    await sleep(3000);
+
+    // 5. Clear output screen display (history remains saved in memory)
+    outputLog.innerHTML = "";
+
+    // 6. Prompt user to turn the PC back on
+    await printSequence(["Press any key to turn the PC back on."]);
+
+    // 7. Set mode to off
+    currentMode = "off";
     return;
   }
 
