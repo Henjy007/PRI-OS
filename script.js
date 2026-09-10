@@ -19,7 +19,6 @@ function playKeySound() {
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {}); // Prevents browser console errors
 }
-
 function playReadySound() {
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const osc = audioCtx.createOscillator();
@@ -119,7 +118,7 @@ function showPrompt() {
   inputLine.classList.remove("hidden");
   cliInput.value = "";
   cliInput.focus();
-  playKeySound();
+  playReadySound();
 }
 
 // ==========================================
@@ -143,13 +142,7 @@ async function handleCommand(rawInput) {
   const trimmed = rawInput.trim();
   appendLine(`${promptSpan.textContent}${rawInput}`);
   
-  // 1. Save to history ONLY if not in login mode AND not 'exit'
-  if (
-    trimmed.length > 0 && 
-    currentMode !== "login_user" && 
-    currentMode !== "login_clearance" &&
-    trimmed.toLowerCase() !== "exit"
-  ) {
+  if (trimmed.length > 0 && currentMode !== "login_user" && currentMode !== "login_clearance") {
     commandHistory.push(rawInput);
     historyIndex = commandHistory.length;
   }
@@ -162,8 +155,9 @@ async function handleCommand(rawInput) {
     return;
   }
 
-  // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
+// LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
   if (currentMode === "login_clearance") {
+    // Check if input consists strictly of a single digit between 0 and 5
     if (!/^[0-5]$/.test(trimmed)) {
       appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
       showPrompt();
@@ -172,16 +166,18 @@ async function handleCommand(rawInput) {
 
     currentClearance = trimmed;
 
+    // Stream the password prompt label
     const passLabel = document.createElement("div");
     passLabel.className = "line";
     passLabel.textContent = "Please insert password: ";
     outputLog.appendChild(passLabel);
 
+    // Stream characters one by one with keypress audio
     const passwordLength = 12;
     for (let i = 0; i < passwordLength; i++) {
       passLabel.textContent += "•";
       playKeySound();
-      await sleep(180);
+      await sleep(60);
     }
 
     await sleep(400);
@@ -204,12 +200,12 @@ async function handleCommand(rawInput) {
     
     if (cmd === "help") {
       await printSequence([
-        "HELP                Provides help for commands.",
-        "SELFCHECK           Performs a System self-check.",
-        "STATIC              Displays and manages static variables.",
-        "RAISASERVICE        Enters Raisa Service for all document needs.",
-        "EXIT                Exits the OS.",
-        "CLEAR               Clears the OS log."
+        "HELP          Recieve a list of commands.",
+        "SELFCHECK     Perform a full system check.",
+        "STATIC        Advance to next prompt line.",
+        "RAISASERVICE  Enters Raisa Service.",
+        "EXIT          Exits the Operating System.",
+        "CLEAR         Clears the terminal screen."
       ]);
     } else if (cmd === "selfcheck") {
       await printSequence([
@@ -245,25 +241,20 @@ async function handleCommand(rawInput) {
       await sleep(2000);
       showPrompt();
     } else if (cmd === "exit") {
-      inputLine.classList.add("hidden");
-      cliInput.disabled = true;
-
       await printSequence([
         "Exiting Operating System...",
         "Locking Session...",
+        { type: "pause", duration: 1500 },
         "SYSTEM SHUTDOWN COMPLETE"
       ]);
-
-      await sleep(3000);
+      await sleep(1500);
       outputLog.innerHTML = "";
-
-      await printSequence(["Press any key to turn the PC back on."]);
-
       currentMode = "off";
-      return;
+      appendLine("Press any key to turn the PC back on.");
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
+    return;
   }
 
   // RAISA SUBSYSTEM MODE
@@ -300,7 +291,7 @@ async function handleCommand(rawInput) {
       }
     } else if (cmd === "open" || cmd === "cat") {
       if (!arg) {
-        await printSequence([`Usage: ${cmd} <document_name>`]);
+        await printSequence(["Usage: open <document_name>"]);
         return;
       }
       if (DOCUMENTS[arg]) {
@@ -327,18 +318,12 @@ async function handleCommand(rawInput) {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
     } else if (cmd === "share" || cmd === "unshare") {
-      if (!arg) {
-        await printSequence([`Usage: ${cmd} <document_name>`]);
-      } else if (!DOCUMENTS[arg]) {
-        await printSequence([`ERROR: Document '${arg}' not found.`]);
-      } else {
-        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
-      }
+      await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
   }
-} // <--- Closes handleCommand()
+}
 
 // ==========================================
 // EVENT LISTENERS
@@ -354,7 +339,6 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex--;
       cliInput.value = commandHistory[historyIndex];
     }
-    playKeySound();
   } else if (e.key === "ArrowDown") {
     e.preventDefault();
     if (historyIndex < commandHistory.length - 1) {
@@ -364,9 +348,16 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex = commandHistory.length;
       cliInput.value = "";
     }
+  } else if (e.key !== "F5") {
     playKeySound();
-  } else if (e.key.length === 1 || e.key === "Backspace") {
-    playKeySound();
+  }
+});
+
+window.addEventListener("keydown", async (e) => {
+  if (currentMode === "off") {
+    outputLog.innerHTML = "";
+    currentMode = "root";
+    await printSequence([`Welcome ${currentUsername}!`, ""]);
   }
 });
 
@@ -376,17 +367,4 @@ document.getElementById("terminal").addEventListener("click", () => {
   }
 });
 
-// Boots up the terminal automatically when the web page first loads
 window.addEventListener("DOMContentLoaded", runBootSequence);
-
-// Turns the PC back on when any key is pressed after an 'exit' shutdown
-window.addEventListener("keydown", (e) => {
-  if (currentMode === "off") {
-    currentMode = "login_user";
-    outputLog.innerHTML = "";
-    historyIndex = commandHistory.length; 
-    cliInput.disabled = false;
-    cliInput.value = "";
-    showPrompt();
-  }
-});
