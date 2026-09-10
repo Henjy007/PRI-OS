@@ -349,8 +349,16 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex = commandHistory.length;
       cliInput.value = "";
     }
-  } else if (e.key !== "F5") {
-    playKeySound();
+  } else {
+    // List keys that should NOT trigger the mechanical audio sound
+    const ignoredKeys = [
+      "Control", "Shift", "Alt", "Meta", "CapsLock", "Tab", "Escape", 
+      "F5", "F12", "Pause", "Insert", "Home", "PageUp", "PageDown", "End"
+    ];
+
+    if (!ignoredKeys.includes(e.key)) {
+      playKeySound();
+    }
   }
 });
 
