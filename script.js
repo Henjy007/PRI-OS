@@ -437,6 +437,7 @@ async function handleCommand(rawInput) {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
   }
+}
 
 // ==========================================
 // EVENT LISTENERS
