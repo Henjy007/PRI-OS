@@ -11,7 +11,7 @@ let historyIndex = -1;
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 // Hitting a keystroke sound
-const keyAudio = new Audio('366f2799-7060-488e-9d1b-f8852a946afd-render.mp3'); 
+const keyAudio = new Audio('Sounds/Hitting a keystroke sound.mp3'); 
 
 function playKeySound() {
   // Cloning the audio node lets keys play rapidly on top of each other without cutting off
@@ -21,7 +21,7 @@ function playKeySound() {
 }
 
 // Sound one
-const soundOneAudio = new Audio('Sound one.mp3'); 
+const soundOneAudio = new Audio('Sounds/Sound one.mp3'); 
 
 function playSoundOne() {
   const soundClone = soundOneAudio.cloneNode();
@@ -30,7 +30,7 @@ function playSoundOne() {
 }
 
 // Sound two
-const soundTwoAudio = new Audio('Sound two.mp3'); 
+const soundTwoAudio = new Audio('Sounds/Sound two.mp3'); 
 
 function playSoundTwo() {
   const soundClone = soundTwoAudio.cloneNode();
@@ -39,7 +39,7 @@ function playSoundTwo() {
 }
 
 // Sound three
-const soundThreeAudio = new Audio('Sound three.mp3'); 
+const soundThreeAudio = new Audio('Sounds/Sound three.mp3'); 
 
 function playSoundThree() {
   const soundClone = soundThreeAudio.cloneNode();
