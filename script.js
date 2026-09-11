@@ -208,7 +208,7 @@ async function handleCommand(rawInput) {
     for (let i = 0; i < passwordLength; i++) {
       passLabel.textContent += "•";
       playKeySound();
-      await sleep(180);
+      await sleep(150);
     }
 
     await sleep(400);
@@ -242,7 +242,7 @@ async function handleCommand(rawInput) {
     } else if (cmd === "selfcheck") {
       await printSequence([
         { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
-        { type: "pause", duration: 1500 },
+        { type: "pause", duration: 1000 },
         { type: "sound", fn: playSoundOne },
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
@@ -250,7 +250,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: "STACK BEGINS FROM 7F90 HEX." },
         { type: "text", value: " " },
         { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK" },
-        { type: "pause", duration: 1500 },
+        { type: "pause", duration: 1000 },
         { type: "sound", fn: playSoundTwo },
         { type: "text", value: "CPU SYSTEMS BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
@@ -266,7 +266,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: " " },
         { type: "pause", duration: 500 },
         { type: "text", value: "CURRENT USER DATA" },
-        { type: "pause", duration: 1500 },
+        { type: "pause", duration: 1000 },
         "",
         `User: ${currentUsername}`,
         "ID: 8592-A4",
