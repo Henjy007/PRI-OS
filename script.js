@@ -332,7 +332,7 @@ async function handleCommand(rawInput) {
     return;
   }
 
-  // RAISA SUBSYSTEM MODE
+// RAISA SUBSYSTEM MODE
   if (currentMode === "raisa") {
     const parts = trimmed.split(" ");
     const cmd = parts[0].toLowerCase();
@@ -369,10 +369,14 @@ async function handleCommand(rawInput) {
         await printSequence([`Usage: ${cmd} <document_name>`]);
         return;
       }
+
+      await printSequence([
+        `Searching for document '${arg}'...`,
+        { type: "pause", duration: 800 }
+      ]);
+
       if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
         await printSequence([
-          `Searching for document '${arg}'...`,
-          { type: "pause", duration: 800 },
           "Document found.",
           { type: "pause", duration: 200 },
           "Opening document...",
@@ -386,10 +390,18 @@ async function handleCommand(rawInput) {
     } else if (cmd === "access") {
       if (!arg) {
         await printSequence(["Usage: access <document_name>"]);
-      } else if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
+        return;
+      }
+
+      await printSequence([
+        `Searching for document '${arg}'...`,
+        { type: "pause", duration: 800 }
+      ]);
+
+      if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
         await printSequence([
           `DOCUMENT: ${arg}`,
-          "CLEARANCE LEVEL: PUBLIC / ALL PERSONNEL APPROVED"
+          "CLEARANCE LEVEL: UNCLASSIFIED // PUBLIC ACCESS"
         ]);
       } else {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
@@ -400,13 +412,21 @@ async function handleCommand(rawInput) {
       const targetUser = args[1];
 
       if (!docName || !targetUser) {
-      await printSequence([`Usage: ${cmd} <document_name> <username>`]);
-      } else if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[docName]) {
-      await printSequence([`ERROR: Document '${docName}' not found.`]);
+        await printSequence([`Usage: ${cmd} <document_name> <username>`]);
+        return;
+      }
+
+      await printSequence([
+        `Searching for document '${docName}'...`,
+        { type: "pause", duration: 800 }
+      ]);
+
+      if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[docName]) {
+        await printSequence([`ERROR: Document '${docName}' not found.`]);
       } else if (parseInt(currentClearance) >= 4) {
-      await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
+        await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
       } else {
-      await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
       }
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
