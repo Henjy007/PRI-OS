@@ -103,6 +103,24 @@ function appendLine(text = "") {
   document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
 }
 
+function appendCommandLog(prefixText, commandText) {
+  const lineDiv = document.createElement("div");
+  lineDiv.className = "line";
+
+  const prefixSpan = document.createElement("span");
+  prefixSpan.className = "prompt-prefix";
+  prefixSpan.textContent = prefixText;
+
+  const cmdSpan = document.createElement("span");
+  cmdSpan.className = "command-text";
+  cmdSpan.textContent = commandText;
+
+  lineDiv.appendChild(prefixSpan);
+  lineDiv.appendChild(cmdSpan);
+  outputLog.appendChild(lineDiv);
+  document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -172,7 +190,7 @@ async function runBootSequence() {
 // ==========================================
 async function handleCommand(rawInput) {
   const trimmed = rawInput.trim();
-  appendLine(`${promptSpan.textContent}${rawInput}`);
+  appendCommandLog(promptSpan.textContent, rawInput);
   
   if (trimmed.length > 0 && currentMode !== "login_user" && currentMode !== "login_clearance") {
     commandHistory.push(rawInput);
@@ -378,7 +396,7 @@ if (currentMode === "login_clearance") {
           { type: "pause", duration: 800 },
           "Document found.",
           "Opening document...",
-          " "
+          " ",
           { type: "pause", duration: 1500 }
         ]);
         await printSequence(DOCUMENTS[arg].content);
