@@ -113,6 +113,14 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
       await sleep(item.delay || defaultDelay);
     } else if (item.type === "pause") {
       await sleep(item.duration);
+    } else if (item.type === "image") {
+      const img = document.createElement("img");
+      img.className = "doc-image";
+      img.src = item.url;
+      img.alt = item.alt || "Document Image";
+      outputLog.appendChild(img);
+      document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
+      await sleep(defaultDelay);
     } else if (item.type === "video") {
       const iframe = document.createElement("iframe");
       iframe.className = "doc-video";
@@ -372,7 +380,7 @@ if (currentMode === "login_clearance") {
           `Searching for document '${arg}'...`,
           { type: "pause", duration: 800 },
           "Document found.",
-          { type: "pause", duration: 200 }
+          { type: "pause", duration: 200 },
           "Opening document...",
           " ",
           { type: "pause", duration: 2000 }
