@@ -395,12 +395,18 @@ async function handleCommand(rawInput) {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
     } else if (cmd === "share" || cmd === "unshare") {
-      if (!arg) {
-        await printSequence([`Usage: ${cmd} <document_name>`]);
-      } else if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[arg]) {
-        await printSequence([`ERROR: Document '${arg}' not found.`]);
+      const args = arg.trim().split(/\s+/);
+      const docName = args[0];
+      const targetUser = args[1];
+
+      if (!docName || !targetUser) {
+      await printSequence([`Usage: ${cmd} <document_name> <username>`]);
+      } else if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[docName]) {
+      await printSequence([`ERROR: Document '${docName}' not found.`]);
+      } else if (parseInt(currentClearance) >= 4) {
+      await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
       } else {
-        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+      await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
       }
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
