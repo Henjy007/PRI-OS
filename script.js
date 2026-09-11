@@ -374,10 +374,11 @@ if (currentMode === "login_clearance") {
       }
       if (DOCUMENTS[arg]) {
         await printSequence([
-          `Searching for document '${arg}'.`,
+          `Searching for document '${arg}'...`,
           { type: "pause", duration: 800 },
           "Document found.",
-          "Opening document.",
+          "Opening document...",
+          " "
           { type: "pause", duration: 1500 }
         ]);
         await printSequence(DOCUMENTS[arg].content);
