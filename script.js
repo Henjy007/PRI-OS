@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION & GLOBAL STATE
 // ==========================================
-const DEFAULT_LINE_DELAY = 200;
+const DEFAULT_LINE_DELAY = 180;
 let currentUsername = "User";
 let currentClearance = "1";
 let currentMode = "login_user"; // 'login_user', 'login_clearance', 'root', 'raisa', 'off'
@@ -183,6 +183,7 @@ async function handleCommand(rawInput) {
   if (currentMode === "login_user") {
     currentUsername = trimmed || "User";
     currentMode = "login_clearance";
+    await sleep(DEFAULT_LINE_DELAY);
     showPrompt();
     return;
   }
@@ -234,7 +235,7 @@ if (currentMode === "login_clearance") {
 
   await sleep(250);
   appendLine("AUTHENTICATING...");
-  await sleep(500);
+  await sleep(750);
   appendLine("SUCCESS");
   appendLine("");
   
@@ -246,7 +247,7 @@ if (currentMode === "login_clearance") {
     { type: "text", value: "Type a command or type 'help' for a list of commands." },
     { type: "text", value: "Type 'exit' to exit the OS." },
   ];
-  await printSequence(postLoginInstructions, 60);
+  await printSequence(postLoginInstructions, 180);
   return;
 }
   
