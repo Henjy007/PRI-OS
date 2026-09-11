@@ -14,10 +14,9 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const keyAudio = new Audio('Sounds/Hitting a keystroke sound.mp3'); 
 
 function playKeySound() {
-  // Cloning the audio node lets keys play rapidly on top of each other without cutting off
   const soundClone = keyAudio.cloneNode(); 
-  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
-  soundClone.play().catch(() => {}); // Prevents browser console errors
+  soundClone.volume = 0.3;
+  soundClone.play().catch(() => {});
 }
 
 // Sound one
@@ -25,7 +24,7 @@ const soundOneAudio = new Audio('Sounds/Sound one.mp3');
 
 function playSoundOne() {
   const soundClone = soundOneAudio.cloneNode();
-  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.volume = 0.3;
   soundClone.play().catch(() => {});
 }
 
@@ -34,7 +33,7 @@ const soundTwoAudio = new Audio('Sounds/Sound two.mp3');
 
 function playSoundTwo() {
   const soundClone = soundTwoAudio.cloneNode();
-  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.volume = 0.3;
   soundClone.play().catch(() => {});
 }
 
@@ -43,7 +42,7 @@ const soundThreeAudio = new Audio('Sounds/Sound three.mp3');
 
 function playSoundThree() {
   const soundClone = soundThreeAudio.cloneNode();
-  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.volume = 0.3;
   soundClone.play().catch(() => {});
 }
 
@@ -127,9 +126,12 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
       iframe.src = item.url;
       iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
       outputLog.appendChild(iframe);
+      document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
       await sleep(defaultDelay);
     } else if (item.type === "sound") {
-      item.fn();
+      if (typeof item.fn === "function") {
+        item.fn();
+      }
     }
   }
   showPrompt();
@@ -167,7 +169,7 @@ async function runBootSequence() {
     { type: "text", value: "Property of the Paragon Research Institute." },
     { type: "text", value: "[ DEUS EX MACHINA ]" },
     { type: "text", value: " " },
-  ])
+  ]);
 }
 
 // ==========================================
@@ -191,72 +193,65 @@ async function handleCommand(rawInput) {
     return;
   }
 
-// LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
-if (currentMode === "login_clearance") {
-  if (!/^[0-5]$/.test(trimmed)) {
+  // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
+  if (currentMode === "login_clearance") {
+    if (!/^[0-5]$/.test(trimmed)) {
+      await sleep(180);
+      appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
+      await sleep(180);
+      showPrompt();
+      return;
+    }
+
+    currentClearance = trimmed;
+
     await sleep(180);
-    appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
-    await sleep(180);
-    showPrompt();
+
+    const passLine = document.createElement("div");
+    passLine.className = "line";
+    
+    const labelSpan = document.createElement("span");
+    labelSpan.textContent = "Please insert password: ";
+    
+    const dotsSpan = document.createElement("span");
+    
+    const cursorSpan = document.createElement("span");
+    cursorSpan.textContent = "|"; 
+
+    passLine.appendChild(labelSpan);
+    passLine.appendChild(dotsSpan);
+    passLine.appendChild(cursorSpan);
+    outputLog.appendChild(passLine);
+
+    await sleep(400); 
+
+    const passwordLength = 12;
+    for (let i = 0; i < passwordLength; i++) {
+      dotsSpan.textContent += "•";
+      playKeySound();
+      cursorSpan.style.visibility = (i % 2 === 0) ? "hidden" : "visible";
+      await sleep(150);
+    }
+
+    cursorSpan.style.visibility = "hidden";
+
+    await sleep(250);
+    appendLine("AUTHENTICATING...");
+    await sleep(750);
+    appendLine("SUCCESS");
+    appendLine("");
+    
+    currentMode = "root";
+    const postLoginInstructions = [
+      { type: "pause", duration: 500 },
+      { type: "text", value: " " },
+      { type: "text", value: "Press the [Up] and [Down] arrow keys to reference previous/later commands" },
+      { type: "text", value: "Type a command or type 'help' for a list of commands." },
+      { type: "text", value: "Type 'exit' to exit the OS." },
+    ];
+    await printSequence(postLoginInstructions, 180);
     return;
   }
-
-  currentClearance = trimmed;
-
-  await sleep(180)
-
-  // 1. Create the container line
-  const passLine = document.createElement("div");
-  passLine.className = "line";
-  
-  const labelSpan = document.createElement("span");
-  labelSpan.textContent = "Please insert password: ";
-  
-  const dotsSpan = document.createElement("span");
-  
-  const cursorSpan = document.createElement("span");
-  cursorSpan.textContent = "|"; 
-
-  passLine.appendChild(labelSpan);
-  passLine.appendChild(dotsSpan);
-  passLine.appendChild(cursorSpan);
-  outputLog.appendChild(passLine);
-
-  // 2. Pause before typing starts
-  await sleep(400); 
-
-  // 3. Autotype dots with flashing cursor effect
-  const passwordLength = 12;
-  for (let i = 0; i < passwordLength; i++) {
-    dotsSpan.textContent += "•";
-    playKeySound();
-    
-    // Toggle cursor visibility for the flashing effect
-    cursorSpan.style.visibility = (i % 2 === 0) ? "hidden" : "visible";
-    
-    await sleep(150);
-  }
-
-  // Hide the autotype cursor once finished
-  cursorSpan.style.visibility = "hidden";
-
-  await sleep(250);
-  appendLine("AUTHENTICATING...");
-  await sleep(750);
-  appendLine("SUCCESS");
-  appendLine("");
-  
-  currentMode = "root";
-  const postLoginInstructions = [
-    { type: "pause", duration: 500 },
-    { type: "text", value: " " },
-    { type: "text", value: "Press the [Up] and [Down] arrow keys to reference previous/later commands" },
-    { type: "text", value: "Type a command or type 'help' for a list of commands." },
-    { type: "text", value: "Type 'exit' to exit the OS." },
-  ];
-  await printSequence(postLoginInstructions, 180);
-  return;
-}
   
   // ROOT MODE
   if (currentMode === "root") {
@@ -337,7 +332,7 @@ if (currentMode === "login_clearance") {
     return;
   }
 
-// RAISA SUBSYSTEM MODE
+  // RAISA SUBSYSTEM MODE
   if (currentMode === "raisa") {
     const parts = trimmed.split(" ");
     const cmd = parts[0].toLowerCase();
@@ -358,11 +353,11 @@ if (currentMode === "login_clearance") {
       currentMode = "root";
       await printSequence(["Exiting Raisa Service."]);
     } else if (cmd === "ls") {
-      const docKeys = Object.keys(DOCUMENTS);
+      const docKeys = typeof DOCUMENTS !== "undefined" ? Object.keys(DOCUMENTS) : [];
       if (docKeys.length === 0) {
         await printSequence(["No documents found."]);
       } else {
-        const lines = ["Document Name:                  Archived on:"];
+        const lines = ["Document Name:                 Archived on:"];
         docKeys.forEach(name => {
           const doc = DOCUMENTS[name];
           lines.push(`${name.padEnd(32, ' ')}${doc.archivedOn}`);
@@ -371,11 +366,10 @@ if (currentMode === "login_clearance") {
       }
     } else if (cmd === "open" || cmd === "cat") {
       if (!arg) {
-        // Dynamically displays 'Usage: open <document_name>' or 'Usage: cat <document_name>'
         await printSequence([`Usage: ${cmd} <document_name>`]);
         return;
       }
-      if (DOCUMENTS[arg]) {
+      if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
         await printSequence([
           `Searching for document '${arg}'...`,
           { type: "pause", duration: 800 },
@@ -392,7 +386,7 @@ if (currentMode === "login_clearance") {
     } else if (cmd === "access") {
       if (!arg) {
         await printSequence(["Usage: access <document_name>"]);
-      } else if (DOCUMENTS[arg]) {
+      } else if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
         await printSequence([
           `DOCUMENT: ${arg}`,
           "CLEARANCE LEVEL: PUBLIC / ALL PERSONNEL APPROVED"
@@ -403,11 +397,9 @@ if (currentMode === "login_clearance") {
     } else if (cmd === "share" || cmd === "unshare") {
       if (!arg) {
         await printSequence([`Usage: ${cmd} <document_name>`]);
-      } else if (!DOCUMENTS[arg]) {
-        // Point 5 fix: Checks if document exists FIRST
+      } else if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[arg]) {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       } else {
-        // Point 5 fix: Only triggers if document exists
         await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
       }
     } else {
@@ -430,7 +422,7 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex--;
       cliInput.value = commandHistory[historyIndex];
     }
-    playKeySound(); // Plays sound for ArrowUp
+    playKeySound();
   } else if (e.key === "ArrowDown") {
     e.preventDefault();
     if (historyIndex < commandHistory.length - 1) {
@@ -440,12 +432,10 @@ cliInput.addEventListener("keydown", (e) => {
       historyIndex = commandHistory.length;
       cliInput.value = "";
     }
-    playKeySound(); // Plays sound for ArrowDown
+    playKeySound();
   } else if (e.key.length === 1 || e.key === "Backspace") {
-    // Plays sound ONLY for single printable characters and Backspace
     playKeySound();
   }
-  // Left/Right arrows, Shift, Ctrl, Alt, CapsLock, F-keys, etc. are silently ignored
 });
 
 window.addEventListener("keydown", async (e) => {
