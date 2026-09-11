@@ -24,7 +24,7 @@ function playKeySound() {
 const soundOneAudio = new Audio('Sound one.mp3'); 
 
 function playSoundOne() {
-  const soundClone = customAudio.cloneNode();
+  const soundClone = soundOneAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
 }
@@ -33,7 +33,7 @@ function playSoundOne() {
 const soundTwoAudio = new Audio('Sound two.mp3'); 
 
 function playsoundTwo() {
-  const soundClone = customAudio.cloneNode();
+  const soundClone = soundTwoAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
 }
@@ -42,7 +42,7 @@ function playsoundTwo() {
 const soundThreeAudio = new Audio('Sound three.mp3'); 
 
 function playsoundThree() {
-  const soundClone = customAudio.cloneNode();
+  const soundClone = soundThreeAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
 }
