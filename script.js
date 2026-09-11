@@ -212,7 +212,7 @@ async function handleCommand(rawInput) {
     } else if (cmd === "selfcheck") {
       await printSequence([
         { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
-        { type: "pause", duration: 2000 },
+        { type: "pause", duration: 1500 },
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
         { type: "text", value: "THE TOP OF RAM IS 7FFF HEX." },
@@ -231,9 +231,9 @@ async function handleCommand(rawInput) {
         { type: "text", value: " " },
         { type: "text", value: "CONSENSUS [ OK ]" },
         { type: "text", value: " " },
-        { type: "pause", duration: 1000 },
+        { type: "pause", duration: 500 },
         { type: "text", value: "CURRENT USER DATA" },
-        { type: "pause", duration: 2000 },
+        { type: "pause", duration: 1500 },
         "",
         `User: ${currentUsername}`,
         "ID: 8592-A4",
