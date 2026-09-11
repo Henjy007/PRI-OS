@@ -291,7 +291,7 @@ async function handleCommand(rawInput) {
         { type: "sound", fn: playSoundThree },
         { type: "text", value: "CONSENSUS [ OK ]" },
         { type: "text", value: " " },
-        { type: "pause", duration: 250 },
+        { type: "pause", duration: 500 },
         { type: "text", value: "CURRENT USER DATA" },
         { type: "pause", duration: 750 },
         "",
