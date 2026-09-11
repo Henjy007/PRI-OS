@@ -343,7 +343,7 @@ if (currentMode === "login_clearance") {
     if (cmd === "help") {
       await printSequence([
         "exit         Exits Raisa Service.",
-        "help         Recieve a list of commands",
+        "help         Recieve a list of commands.",
         "open         Open a document by name.",
         "cat          Open a document by name.",
         "share        Shares a document to a specified personnel.",
