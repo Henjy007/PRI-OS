@@ -372,6 +372,7 @@ if (currentMode === "login_clearance") {
           `Searching for document '${arg}'...`,
           { type: "pause", duration: 800 },
           "Document found.",
+          { type: "pause", duration: 180 }
           "Opening document...",
           " ",
           { type: "pause", duration: 1500 }
