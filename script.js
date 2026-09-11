@@ -10,7 +10,7 @@ let historyIndex = -1;
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-// Load your uploaded audio file
+// Hitting a keystroke sound
 const keyAudio = new Audio('366f2799-7060-488e-9d1b-f8852a946afd-render.mp3'); 
 
 function playKeySound() {
@@ -19,6 +19,34 @@ function playKeySound() {
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {}); // Prevents browser console errors
 }
+
+// Sound one
+const soundOneAudio = new Audio('Sound one.mp3'); 
+
+function playsoundOne() {
+  const soundClone = customAudio.cloneNode();
+  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.play().catch(() => {});
+}
+
+// Sound two
+const soundTwoAudio = new Audio('Sound two.mp3'); 
+
+function playsoundTwo() {
+  const soundClone = customAudio.cloneNode();
+  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.play().catch(() => {});
+}
+
+// Sound three
+const soundThreeAudio = new Audio('Sound three.mp3'); 
+
+function playsoundThree() {
+  const soundClone = customAudio.cloneNode();
+  soundClone.volume = 0.3; // Volume from 0.0 to 1.0
+  soundClone.play().catch(() => {});
+}
+
 function playReadySound() {
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const osc = audioCtx.createOscillator();
@@ -213,6 +241,7 @@ async function handleCommand(rawInput) {
       await printSequence([
         { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
         { type: "pause", duration: 1500 },
+        playSoundOne();
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
         { type: "text", value: "THE TOP OF RAM IS 7FFF HEX." },
@@ -220,6 +249,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: " " },
         { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK" },
         { type: "pause", duration: 1500 },
+        playSoundTwo();
         { type: "text", value: "CPU SYSTEMS BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
         { type: "text", value: "Started Initialize ExtIOStream" },
@@ -229,6 +259,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: "Started Apply Kernel Variables" },
         { type: "text", value: "Running init.s" },
         { type: "text", value: " " },
+        playSoundThree();
         { type: "text", value: "CONSENSUS [ OK ]" },
         { type: "text", value: " " },
         { type: "pause", duration: 500 },
