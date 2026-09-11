@@ -158,7 +158,7 @@ function showPrompt() {
 async function runBootSequence() {
   currentMode = "login_user";
   await printSequence([
-    { type: "pause", duration: 250 },
+    { type: "pause", duration: 500 },
     { type: "text", value: "Paragon OS. v2.3.11786 (c) 1982 Generative OS. All rights reserved. Licensed under the MIT License." },
     { type: "pause", duration: 750 },
     { type: "text", value: "Property of the Paragon Research Institute." },
@@ -212,13 +212,15 @@ async function handleCommand(rawInput) {
       await sleep(150);
     }
 
-    await sleep(750);
-    appendLine("AUTHENTICATING... SUCCESS");
+    await sleep(250);
+    appendLine("AUTHENTICATING...");
+    await sleep(500);
+    appendLine("SUCCESS");
     appendLine("");
     
     currentMode = "root";
     const postLoginInstructions = [
-      { type: "pause", duration: 750 },
+      { type: "pause", duration: 500 },
       { type: "text", value: " " },
       { type: "text", value: "Press the [Up] and [Down] arrow keys to reference previous/later commands" },
       { type: "text", value: "Type a command or type 'help' for a list of commands." },
