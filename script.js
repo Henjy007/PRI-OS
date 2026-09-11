@@ -211,20 +211,33 @@ async function handleCommand(rawInput) {
       ]);
     } else if (cmd === "selfcheck") {
       await printSequence([
-        "BEGINNING SELF CHECK PROTOCOL...",
-        { type: "text", value: "BEGIN MEMORY BOARD CHECK..." },
-        { type: "pause", duration: 1500 },
+        { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
+        { type: "pause", duration: 2000 },
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
-        { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK..." },
+        { type: "text", value: " " },
+        { type: "text", value: "THE TOP OF RAM IS 7FFF HEX." },
+        { type: "text", value: "STACK BEGINS FROM 7F90 HEX." },
+        { type: "text", value: " " },
+        { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK" },
         { type: "pause", duration: 1500 },
         { type: "text", value: "CPU SYSTEMS BOARD CHECK [ OK ]" },
-        { type: "text", value: "Running init.s..." },
-        { type: "pause", duration: 2000 },
+        { type: "text", value: " " },
+        { type: "text", value: "Started Initialize ExtIOStream" },
+        { type: "text", value: "No External Storage Device Detected" },
+        { type: "text", value: "Mounting $boot..." },
+        { type: "text", value: "Mounted $boot [ OK ]" },
+        { type: "text", value: "Started Apply Kernel Variables" },
+        { type: "text", value: "Running init.s" },
+        { type: "text", value: " " },
         { type: "text", value: "CONSENSUS [ OK ]" },
+        { type: "text", value: " " },
+        { type: "pause", duration: 1000 },
+        { type: "text", value: "CURRENT USER DATA" },
+        { type: "pause", duration: 2000 },
         "",
         `User: ${currentUsername}`,
         "ID: 8592-A4",
-        `Rank: Level-${currentClearance} Clearance`
+        `Rank: SC-${currentClearance}`
       ]);
     } else if (cmd === "static") {
       showPrompt();
