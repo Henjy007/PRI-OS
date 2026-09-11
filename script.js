@@ -157,13 +157,13 @@ function showPrompt() {
 // ==========================================
 async function runBootSequence() {
   currentMode = "login_user";
-  const bootText = [
-    "Paragon OS. v2.3.11786 (c) 1982 Generative OS. All rights reserved. Licensed under the MIT License.",
-    "Property of the Paragon Research Institute.",
-    "[ DEUS EX MACHINA ]",
-    " "
-  ];
-  await printSequence(bootText, 80);
+  await printSequence([
+    { type: "text", value: "Paragon OS. v2.3.11786 (c) 1982 Generative OS. All rights reserved. Licensed under the MIT License." },
+    { type: "pause", duration: 750 },
+    { type: "text", value: "Property of the Paragon Research Institute." },
+    { type: "text", value: "[ DEUS EX MACHINA ]" },
+    { type: "text", value: " " },
+  ])
 }
 
 // ==========================================
@@ -211,7 +211,7 @@ async function handleCommand(rawInput) {
       await sleep(150);
     }
 
-    await sleep(400);
+    await sleep(500);
     appendLine("AUTHENTICATING... SUCCESS");
     appendLine("");
     
