@@ -198,7 +198,7 @@ if (currentMode === "login_clearance") {
 
   currentClearance = trimmed;
 
-  await sleep(DEFAULT_LINE_DELAY)
+  await sleep(180)
 
   // 1. Create the container line
   const passLine = document.createElement("div");
