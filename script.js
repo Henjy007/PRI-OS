@@ -23,7 +23,7 @@ function playKeySound() {
 // Sound one
 const soundOneAudio = new Audio('Sound one.mp3'); 
 
-function playsoundOne() {
+function playSoundOne() {
   const soundClone = customAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
