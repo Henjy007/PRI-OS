@@ -32,7 +32,7 @@ function playSoundOne() {
 // Sound two
 const soundTwoAudio = new Audio('Sound two.mp3'); 
 
-function playsoundTwo() {
+function playSoundTwo() {
   const soundClone = soundTwoAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
@@ -41,7 +41,7 @@ function playsoundTwo() {
 // Sound three
 const soundThreeAudio = new Audio('Sound three.mp3'); 
 
-function playsoundThree() {
+function playSoundThree() {
   const soundClone = soundThreeAudio.cloneNode();
   soundClone.volume = 0.3; // Volume from 0.0 to 1.0
   soundClone.play().catch(() => {});
