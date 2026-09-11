@@ -4,9 +4,9 @@
 
 const DOCUMENTS = {
   "test_001": {
-    archivedOn: "07/09/2026",
+    archivedOn: "09/09/2026",
     content: [
-      { type: "text", value: "PARAGON RESEARCH INSTITUTE - CLASSIFIED RECORD" },
+      { type: "text", value: "PARAGON RESEARCH INSTITUTE - BASIC TEST" },
       { type: "text", value: "Subject: Initial terminal testing sequence." },
       { type: "pause", duration: 1000 },
       { type: "text", value: "Status: All subsystem parameters nominal." }
