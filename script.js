@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION & GLOBAL STATE
 // ==========================================
-const DEFAULT_LINE_DELAY = 180;
+const DEFAULT_LINE_DELAY = 150;
 let currentUsername = "User";
 let currentClearance = "1";
 let currentMode = "login_user"; // 'login_user', 'login_clearance', 'root', 'raisa', 'off'
@@ -271,7 +271,7 @@ if (currentMode === "login_clearance") {
     } else if (cmd === "selfcheck") {
       await printSequence([
         { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
-        { type: "pause", duration: 1000 },
+        { type: "pause", duration: 750 },
         { type: "sound", fn: playSoundOne },
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
@@ -279,7 +279,7 @@ if (currentMode === "login_clearance") {
         { type: "text", value: "STACK BEGINS FROM 7F90 HEX." },
         { type: "text", value: " " },
         { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK" },
-        { type: "pause", duration: 1000 },
+        { type: "pause", duration: 750 },
         { type: "sound", fn: playSoundTwo },
         { type: "text", value: "CPU SYSTEMS BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
@@ -293,9 +293,9 @@ if (currentMode === "login_clearance") {
         { type: "sound", fn: playSoundThree },
         { type: "text", value: "CONSENSUS [ OK ]" },
         { type: "text", value: " " },
-        { type: "pause", duration: 500 },
+        { type: "pause", duration: 250 },
         { type: "text", value: "CURRENT USER DATA" },
-        { type: "pause", duration: 1000 },
+        { type: "pause", duration: 750 },
         "",
         `User: ${currentUsername}`,
         "ID: 8592-A4",
