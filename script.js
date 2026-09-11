@@ -191,16 +191,16 @@ async function handleCommand(rawInput) {
 // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
 if (currentMode === "login_clearance") {
   if (!/^[0-5]$/.test(trimmed)) {
-    // printSequence handles the delay and automatically calls showPrompt() when finished
-    await printSequence([
-      "ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5."
-    ], 180);
+    await sleep(180);
+    appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
+    await sleep(180);
+    showPrompt();
     return;
   }
 
   currentClearance = trimmed;
 
-  await sleep(180);
+  await sleep(180)
 
   // 1. Create the container line
   const passLine = document.createElement("div");
