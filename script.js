@@ -352,7 +352,7 @@ async function handleCommand(rawInput) {
     } else if (cmd === "exit") {
       currentMode = "root";
       await printSequence(["Exiting Raisa Service."]);
-    } } else if (cmd === "ls") {
+    } else if (cmd === "ls") {
       await printSequence([
         "Indexing archive registry...",
         { type: "pause", duration: 1200 }
@@ -368,7 +368,8 @@ async function handleCommand(rawInput) {
           lines.push(`${name.padEnd(32, ' ')}${doc.archivedOn}`);
         });
         await printSequence(lines);
-      } else if (cmd === "open" || cmd === "cat") {
+      }
+    } else if (cmd === "open" || cmd === "cat") {
       if (!arg) {
         await printSequence([`Usage: ${cmd} <document_name>`]);
         return;
@@ -436,7 +437,6 @@ async function handleCommand(rawInput) {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
   }
-}
 
 // ==========================================
 // EVENT LISTENERS
