@@ -241,7 +241,7 @@ async function handleCommand(rawInput) {
       await printSequence([
         { type: "text", value: "BEGIN MEMORY BOARD CHECK" },
         { type: "pause", duration: 1500 },
-        playSoundOne();
+        playSoundOne(),
         { type: "text", value: "MEMORY BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
         { type: "text", value: "THE TOP OF RAM IS 7FFF HEX." },
@@ -249,7 +249,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: " " },
         { type: "text", value: "BEGIN CPU SYSTEMS BOARD CHECK" },
         { type: "pause", duration: 1500 },
-        playSoundTwo();
+        playSoundTwo(),
         { type: "text", value: "CPU SYSTEMS BOARD CHECK [ OK ]" },
         { type: "text", value: " " },
         { type: "text", value: "Started Initialize ExtIOStream" },
@@ -259,7 +259,7 @@ async function handleCommand(rawInput) {
         { type: "text", value: "Started Apply Kernel Variables" },
         { type: "text", value: "Running init.s" },
         { type: "text", value: " " },
-        playSoundThree();
+        playSoundThree(),
         { type: "text", value: "CONSENSUS [ OK ]" },
         { type: "text", value: " " },
         { type: "pause", duration: 500 },
