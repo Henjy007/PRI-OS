@@ -62,29 +62,6 @@ function playReadySound() {
 }
 
 // ==========================================
-// DOCUMENT DATABASE ARCHITECTURE
-// ==========================================
-const DOCUMENTS = {
-  "test_001": {
-    archivedOn: "07/09/2026",
-    content: [
-      { type: "text", value: "PARAGON RESEARCH INSTITUTE - CLASSIFIED RECORD" },
-      { type: "text", value: "Subject: Initial terminal testing sequence." },
-      { type: "pause", duration: 1000 },
-      { type: "text", value: "Status: All subsystem parameters nominal." }
-    ]
-  },
-  "test_002": {
-    archivedOn: "08/09/2026",
-    content: [
-      { type: "text", value: "PARAGON RESEARCH INSTITUTE - VIDEO ARCHIVE" },
-      { type: "video", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-      { type: "text", value: "End of media transmission." }
-    ]
-  }
-};
-
-// ==========================================
 // DOM ELEMENTS
 // ==========================================
 const outputLog = document.getElementById("output-log");
