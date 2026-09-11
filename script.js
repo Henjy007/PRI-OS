@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION & GLOBAL STATE
 // ==========================================
-const DEFAULT_LINE_DELAY = 150;
+const DEFAULT_LINE_DELAY = 200;
 let currentUsername = "User";
 let currentClearance = "1";
 let currentMode = "login_user"; // 'login_user', 'login_clearance', 'root', 'raisa', 'off'
