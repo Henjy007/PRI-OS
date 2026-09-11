@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURATION & GLOBAL STATE
 // ==========================================
-const DEFAULT_LINE_DELAY = 150;
+const DEFAULT_LINE_DELAY = 200;
 let currentUsername = "User";
 let currentClearance = "1";
 let currentMode = "login_user"; // 'login_user', 'login_clearance', 'root', 'raisa', 'off'
@@ -188,47 +188,67 @@ async function handleCommand(rawInput) {
   }
 
 // LOGIN STEP 2: CLEARANCE & AUTO-PASSWORD
-  if (currentMode === "login_clearance") {
-    // Check if input consists strictly of a single digit between 0 and 5
-    if (!/^[0-5]$/.test(trimmed)) {
-      appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
-      showPrompt();
-      return;
-    }
-
-    currentClearance = trimmed;
-
-    // Stream the password prompt label
-    const passLabel = document.createElement("div");
-    passLabel.className = "line";
-    passLabel.textContent = "Please insert password: ";
-    outputLog.appendChild(passLabel);
-
-    // Stream characters one by one with keypress audio
-    const passwordLength = 12;
-    for (let i = 0; i < passwordLength; i++) {
-      passLabel.textContent += "•";
-      playKeySound();
-      await sleep(150);
-    }
-
-    await sleep(250);
-    appendLine("AUTHENTICATING...");
-    await sleep(500);
-    appendLine("SUCCESS");
-    appendLine("");
-    
-    currentMode = "root";
-    const postLoginInstructions = [
-      { type: "pause", duration: 500 },
-      { type: "text", value: " " },
-      { type: "text", value: "Press the [Up] and [Down] arrow keys to reference previous/later commands" },
-      { type: "text", value: "Type a command or type 'help' for a list of commands." },
-      { type: "text", value: "Type 'exit' to exit the OS." },
-    ];
-    await printSequence(postLoginInstructions, 60);
+if (currentMode === "login_clearance") {
+  if (!/^[0-5]$/.test(trimmed)) {
+    appendLine("ERROR: Invalid Security Clearance level. Must be a digit from 0 to 5.");
+    showPrompt();
     return;
   }
+
+  currentClearance = trimmed;
+
+  // 1. Create the container line
+  const passLine = document.createElement("div");
+  passLine.className = "line";
+  
+  const labelSpan = document.createElement("span");
+  labelSpan.textContent = "Please insert password: ";
+  
+  const dotsSpan = document.createElement("span");
+  
+  const cursorSpan = document.createElement("span");
+  cursorSpan.textContent = "|"; 
+
+  passLine.appendChild(labelSpan);
+  passLine.appendChild(dotsSpan);
+  passLine.appendChild(cursorSpan);
+  outputLog.appendChild(passLine);
+
+  // 2. Pause before typing starts
+  await sleep(400); 
+
+  // 3. Autotype dots with flashing cursor effect
+  const passwordLength = 12;
+  for (let i = 0; i < passwordLength; i++) {
+    dotsSpan.textContent += "•";
+    playKeySound();
+    
+    // Toggle cursor visibility for the flashing effect
+    cursorSpan.style.visibility = (i % 2 === 0) ? "hidden" : "visible";
+    
+    await sleep(150);
+  }
+
+  // Hide the autotype cursor once finished
+  cursorSpan.style.visibility = "hidden";
+
+  await sleep(250);
+  appendLine("AUTHENTICATING...");
+  await sleep(500);
+  appendLine("SUCCESS");
+  appendLine("");
+  
+  currentMode = "root";
+  const postLoginInstructions = [
+    { type: "pause", duration: 500 },
+    { type: "text", value: " " },
+    { type: "text", value: "Press the [Up] and [Down] arrow keys to reference previous/later commands" },
+    { type: "text", value: "Type a command or type 'help' for a list of commands." },
+    { type: "text", value: "Type 'exit' to exit the OS." },
+  ];
+  await printSequence(postLoginInstructions, 60);
+  return;
+}
   
   // ROOT MODE
   if (currentMode === "root") {
