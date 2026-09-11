@@ -313,7 +313,7 @@ async function handleCommand(rawInput) {
       await sleep(2500);
       outputLog.classList.remove("credits-scroll");
       outputLog.innerHTML = "";
-      await sleep(1000);
+      await sleep(500);
       showPrompt();
     } else if (cmd === "exit") {
       await printSequence([
