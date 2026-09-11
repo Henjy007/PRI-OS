@@ -333,7 +333,7 @@ if (currentMode === "login_clearance") {
       await sleep(2500);
       outputLog.classList.remove("credits-scroll");
       outputLog.innerHTML = "";
-      await sleep(2000);
+      await sleep(1000);
       showPrompt();
     } else if (cmd === "exit") {
       await printSequence([
