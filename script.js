@@ -323,17 +323,30 @@ async function handleCommand(rawInput) {
       outputLog.innerHTML = "";
       await sleep(500);
       showPrompt();
-    } else if (cmd === "exit") {
-      await printSequence([
+    } } else if (cmd === "exit") {
+      // 1. Immediately hide input prompt and mark mode as 'off'
+      inputLine.classList.add("hidden");
+      currentMode = "off";
+
+      // 2. Print shutdown text (without triggering showPrompt at the end)
+      for (const item of [
         "Exiting Operating System...",
         "Locking Session...",
         { type: "pause", duration: 1500 },
         "SYSTEM SHUTDOWN COMPLETE"
-      ]);
+      ]) {
+        if (typeof item === "string") {
+          appendLine(item);
+          await sleep(DEFAULT_LINE_DELAY);
+        } else if (item.type === "pause") {
+          await sleep(item.duration);
+        }
+      }
+
+      // 3. Clear terminal screen and display wake-up prompt
       await sleep(1500);
       outputLog.innerHTML = "";
-      currentMode = "off";
-      appendLine("Press any key to turn the PC back on.");
+      appendLine("Press any key to start Paragon OS.");
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
@@ -492,9 +505,12 @@ cliInput.addEventListener("keydown", (e) => {
 
 window.addEventListener("keydown", async (e) => {
   if (currentMode === "off") {
+    // Prevent accidental key repeats from instantly triggering
+    if (e.repeat) return;
+    
     outputLog.innerHTML = "";
     currentMode = "root";
-    await printSequence([`Welcome ${currentUsername}!`, ""]);
+    await printSequence([`Welcome back, ${currentUsername}!`, ""]);
   }
 });
 
