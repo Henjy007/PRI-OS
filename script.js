@@ -413,7 +413,7 @@ async function handleCommand(rawInput) {
       } else {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
-    } else if (cmd === "share" || cmd === "unshare") {
+    } } else if (cmd === "share" || cmd === "unshare") {
       const args = arg.trim().split(/\s+/);
       const docName = args[0];
       const targetUser = args[1];
@@ -423,17 +423,30 @@ async function handleCommand(rawInput) {
         return;
       }
 
+      // 1. Always search for the document first
       await printSequence([
         `Searching for document '${docName}'...`,
         { type: "pause", duration: 800 }
       ]);
 
+      // 2. Check if document exists
       if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[docName]) {
         await printSequence([`ERROR: Document '${docName}' not found.`]);
-      } else if (parseInt(currentClearance) >= 4) {
-        await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
       } else {
-        await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+        // Document exists -> show confirmation & pending status
+        await printSequence([
+          "Document found.",
+          { type: "pause", duration: 300 },
+          "Pending authorization...",
+          { type: "pause", duration: 1000 }
+        ]);
+
+        // 3. Evaluate security clearance / RAISA locks
+        if (parseInt(currentClearance) >= 4) {
+          await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
+        } else {
+          await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
+        }
       }
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
