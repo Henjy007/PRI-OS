@@ -23,7 +23,7 @@ const DOCUMENTS = {
       { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
       { type: "text", value: "TITLE - PLACEHOLDER" },
       { type: "pause", duration: 1000 },
-      { type: "doc", url: "https://docs.google.com/document/d/YOUR_DOC_ID/preview" },
+      { type: "doc", url: "https://docs.google.com/document/d/14fDPWCguIFOlaAD6rkCCtMgKZzVlTFoikuNM9G1EcsA/preview" },
       { type: "pause", duration: 1000 },
       { type: "text", value: "End of document." },
       { type: "text", value: " " }
