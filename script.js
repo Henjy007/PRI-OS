@@ -443,7 +443,7 @@ async function handleCommand(rawInput) {
 
         // 3. Evaluate security clearance / RAISA locks
         if (parseInt(currentClearance) >= 4) {
-          await printSequence(["Access Denied: Document permissions are locked by RAISA protocol."]);
+          await printSequence(["Access Denied: Document permissions are locked by RAISA command."]);
         } else {
           await printSequence(["Access Denied: Clearance level insufficient to modify document permissions."]);
         }
