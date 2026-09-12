@@ -124,7 +124,9 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
       const iframe = document.createElement("iframe");
       iframe.className = "doc-video";
       iframe.src = item.url;
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      // Added fullscreen permissions to allow policy
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
+      iframe.allowFullscreen = true; // Enables native browser fullscreen mode
       outputLog.appendChild(iframe);
       document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
       await sleep(defaultDelay);
