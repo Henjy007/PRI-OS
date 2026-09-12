@@ -324,15 +324,18 @@ async function handleCommand(rawInput) {
       await sleep(500);
       showPrompt();
      } else if (cmd === "exit") {
+      // 1. Instantly hide the input prompt and mark mode as off
       inputLine.classList.add("hidden");
       currentMode = "off";
 
-      await printSequence([
-        "Exiting Operating System...",
-        "Locking Session...",
-        { type: "pause", duration: 1500 },
-        "SYSTEM SHUTDOWN COMPLETE"
-      ]);
+      // 2. Print shutdown sequence directly under existing log
+      appendLine("Exiting Operating System...");
+      await sleep(DEFAULT_LINE_DELAY);
+      appendLine("Locking Session...");
+      await sleep(1500);
+      appendLine("SYSTEM SHUTDOWN COMPLETE");
+      
+      // 3. Pause, clear screen, and show reboot instruction
       await sleep(1500);
       outputLog.innerHTML = "";
       appendLine("Press any key to start Paragon OS.");
@@ -496,15 +499,12 @@ cliInput.addEventListener("keydown", (e) => {
 
 window.addEventListener("keydown", async (e) => {
   if (currentMode === "off") {
-    outputLog.innerHTML = "";
-    currentMode = "root";
-    await printSequence([`Welcome ${currentUsername}!`, ""]);
-  }
-});
-
-document.getElementById("terminal").addEventListener("click", () => {
-  if (currentMode !== "off" && !inputLine.classList.contains("hidden")) {
-    cliInput.focus();
+    // Only reboot if shutdown is finished and waiting on the blank screen
+    if (outputLog.innerHTML.includes("Press any key to start Paragon OS.")) {
+      outputLog.innerHTML = "";
+      currentMode = "root";
+      await printSequence([`Welcome ${currentUsername}!`, ""]);
+    }
   }
 });
 
