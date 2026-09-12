@@ -418,6 +418,8 @@ async function handleCommand(rawInput) {
 
       if (typeof DOCUMENTS !== "undefined" && DOCUMENTS[arg]) {
         await printSequence([
+          `Document found.`,
+          { type: "pause", duration: 300 },
           `DOCUMENT: ${arg}`,
           "CLEARANCE LEVEL: UNCLASSIFIED // PUBLIC ACCESS"
         ]);
