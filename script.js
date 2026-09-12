@@ -323,7 +323,10 @@ async function handleCommand(rawInput) {
       outputLog.innerHTML = "";
       await sleep(500);
       showPrompt();
-    } else if (cmd === "exit") {
+     } else if (cmd === "exit") {
+      inputLine.classList.add("hidden");
+      currentMode = "off";
+
       await printSequence([
         "Exiting Operating System...",
         "Locking Session...",
@@ -332,7 +335,6 @@ async function handleCommand(rawInput) {
       ]);
       await sleep(1500);
       outputLog.innerHTML = "";
-      currentMode = "off";
       appendLine("Press any key to start Paragon OS.");
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
@@ -464,6 +466,8 @@ async function handleCommand(rawInput) {
 // EVENT LISTENERS
 // ==========================================
 cliInput.addEventListener("keydown", (e) => {
+  if (currentMode === "off") return;
+
   if (e.key === "Enter") {
     const val = cliInput.value;
     inputLine.classList.add("hidden");
