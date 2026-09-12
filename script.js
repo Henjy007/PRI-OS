@@ -333,7 +333,7 @@ async function handleCommand(rawInput) {
       await sleep(1500);
       outputLog.innerHTML = "";
       currentMode = "off";
-      appendLine("Press any key to turn the PC back on.");
+      appendLine("Press any key to start Paragon OS.");
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
