@@ -16,9 +16,7 @@ const DOCUMENTS = {
       { type: "text", value: " " }
     ]
   },
-};
-
-const DOCUMENTS = {
+  
   "placeholder": {
     archivedOn: "12/09/19XX",
     content: [
