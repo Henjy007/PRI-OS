@@ -213,11 +213,14 @@ async function handleCommand(rawInput) {
     passLine.className = "line";
     
     const labelSpan = document.createElement("span");
+    labelSpan.className = "prompt-prefix";
     labelSpan.textContent = "Please insert password: ";
     
     const dotsSpan = document.createElement("span");
+    dotsSpan.className = "command-text";
     
     const cursorSpan = document.createElement("span");
+    cursorSpan.className = "command-text";
     cursorSpan.textContent = "|"; 
 
     passLine.appendChild(labelSpan);
