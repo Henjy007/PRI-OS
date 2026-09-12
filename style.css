@@ -84,11 +84,18 @@ body {
   100% { transform: translateY(-120vh); opacity: 1; }
 }
 
+/* VIDEO STYLING (Enlarged for clear viewing) */
 .doc-video {
-  width: 560px;
-  height: 315px;
+  width: 900px;
+  height: 506px;
+  max-width: 100%;
+  margin: 10px 0;
+  border: 1px solid #333;
+  display: block;
+}
 
-  .prompt-prefix {
+/* COMMAND LOG STYLING */
+.prompt-prefix {
   white-space: pre;
   color: #ffffff;
   font-weight: bold;
@@ -99,8 +106,4 @@ body {
   color: #ffffff;
   font-size: 1rem;
   font-family: 'Consolas', 'Monaco', monospace;
-}
-  max-width: 100%;
-  margin: 10px 0;
-  border: 1px solid #333;
 }
