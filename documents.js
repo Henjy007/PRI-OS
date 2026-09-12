@@ -24,7 +24,7 @@ const DOCUMENTS = {
       { type: "text", value: "TITLE - PLACEHOLDER" },
       { type: "pause", duration: 1000 },
       { type: "video", // Uses iframe under the hood in your script
-        url: "https://docs.google.com/document/d/14fDPWCguIFOlaAD6rkCCtMgKZzVlTFoikuNM9G1EcsA/edit?tab=t.0" }
+        url: "https://docs.google.com/document/d/14fDPWCguIFOlaAD6rkCCtMgKZzVlTFoikuNM9G1EcsA/edit?tab=t.0" },
       { type: "pause", duration: 1000 },
       { type: "text", value: "End of document." },
       { type: "text", value: " " }
