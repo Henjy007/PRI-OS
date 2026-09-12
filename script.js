@@ -413,7 +413,7 @@ async function handleCommand(rawInput) {
       } else {
         await printSequence([`ERROR: Document '${arg}' not found.`]);
       }
-    } } else if (cmd === "share" || cmd === "unshare") {
+    } else if (cmd === "share" || cmd === "unshare") {
       const args = arg.trim().split(/\s+/);
       const docName = args[0];
       const targetUser = args[1];
