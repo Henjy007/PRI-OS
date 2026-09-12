@@ -115,7 +115,7 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
     } else if (item.type === "image") {
       const img = document.createElement("img");
       img.className = "doc-image";
-      img.src = item.url;
+      img.src = item.url; // <--- Accepts external HTTPS links or local paths
       img.alt = item.alt || "Document Image";
       outputLog.appendChild(img);
       document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
