@@ -12,7 +12,7 @@ const DOCUMENTS = {
       { type: "pause", duration: 1000 },
       { type: "video", url: "https://medal.tv/clip/nvnogn9UZwgK_ya89/embed" },
       { type: "pause", duration: 1000 },
-      { type: "text", value: "End of document." }
+      { type: "text", value: "End of document." },
       { type: "text", value: " " }
     ]
   },
