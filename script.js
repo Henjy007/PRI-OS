@@ -8,6 +8,9 @@ let currentMode = "login_user"; // 'login_user', 'login_clearance', 'root', 'rai
 let commandHistory = [];
 let historyIndex = -1;
 
+// Generates a random 10-digit ID on page load
+const currentID = Math.floor(1000000000 + Math.random() * 9000000000);
+
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 // Hitting a keystroke sound
@@ -301,7 +304,7 @@ async function handleCommand(rawInput) {
         { type: "pause", duration: 750 },
         "",
         `User: ${currentUsername}`,
-        "ID: 8592-A4",
+        `ID: FP - ${currentID}`,
         `Rank: SC-${currentClearance}`
       ]);
     } else if (cmd === "static") {
