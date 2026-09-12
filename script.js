@@ -133,6 +133,14 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
       outputLog.appendChild(iframe);
       document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
       await sleep(defaultDelay);
+    } else if (item.type === "iframe" || item.type === "doc") {
+      const iframe = document.createElement("iframe");
+      iframe.className = "doc-frame";
+      iframe.src = item.url;
+      iframe.allowFullscreen = true;
+      outputLog.appendChild(iframe);
+      document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
+      await sleep(defaultDelay);
     } else if (item.type === "sound") {
       if (typeof item.fn === "function") {
         item.fn();
