@@ -118,7 +118,7 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
     } else if (item.type === "image") {
       const img = document.createElement("img");
       img.className = "doc-image";
-      img.src = item.url;
+      img.src = item.url; // <--- Accepts external HTTPS links or local paths
       img.alt = item.alt || "Document Image";
       outputLog.appendChild(img);
       document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
@@ -127,8 +127,9 @@ async function printSequence(lines, defaultDelay = DEFAULT_LINE_DELAY) {
       const iframe = document.createElement("iframe");
       iframe.className = "doc-video";
       iframe.src = item.url;
+      // Added fullscreen permissions to allow policy
       iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen";
-      iframe.allowFullscreen = true;
+      iframe.allowFullscreen = true; // Enables native browser fullscreen mode
       outputLog.appendChild(iframe);
       document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
       await sleep(defaultDelay);
@@ -323,33 +324,23 @@ async function handleCommand(rawInput) {
       await sleep(500);
       showPrompt();
     } else if (cmd === "exit") {
-      inputLine.classList.add("hidden");
-      currentMode = "off";
-
-      for (const item of [
+      await printSequence([
         "Exiting Operating System...",
         "Locking Session...",
         { type: "pause", duration: 1500 },
         "SYSTEM SHUTDOWN COMPLETE"
-      ]) {
-        if (typeof item === "string") {
-          appendLine(item);
-          await sleep(DEFAULT_LINE_DELAY);
-        } else if (item.type === "pause") {
-          await sleep(item.duration);
-        }
-      }
-
+      ]);
       await sleep(1500);
       outputLog.innerHTML = "";
-      appendLine("Press any key to start Paragon OS.");
+      currentMode = "off";
+      appendLine("Press any key to turn the PC back on.");
     } else {
       await printSequence([`ERROR: Command '${trimmed}' not found.`]);
     }
     return;
   }
 
-  // RAISA SUBSYSTEM MODE
+// RAISA SUBSYSTEM MODE
   if (currentMode === "raisa") {
     const parts = trimmed.split(" ");
     const cmd = parts[0].toLowerCase();
@@ -438,14 +429,17 @@ async function handleCommand(rawInput) {
         return;
       }
 
+      // 1. Always search for the document first
       await printSequence([
         `Searching for document '${docName}'...`,
         { type: "pause", duration: 800 }
       ]);
 
-      if (typeof DOCUMENTS !== "undefined" || !DOCUMENTS[docName]) {
+      // 2. Check if document exists
+      if (typeof DOCUMENTS === "undefined" || !DOCUMENTS[docName]) {
         await printSequence([`ERROR: Document '${docName}' not found.`]);
       } else {
+        // Document exists -> show confirmation & pending status
         await printSequence([
           "Document found.",
           { type: "pause", duration: 300 },
@@ -453,6 +447,7 @@ async function handleCommand(rawInput) {
           { type: "pause", duration: 1000 }
         ]);
 
+        // 3. Evaluate security clearance / RAISA locks
         if (parseInt(currentClearance) >= 4) {
           await printSequence(["Access Denied: Document permissions are locked by RAISA command."]);
         } else {
@@ -497,11 +492,9 @@ cliInput.addEventListener("keydown", (e) => {
 
 window.addEventListener("keydown", async (e) => {
   if (currentMode === "off") {
-    if (e.repeat) return;
-    
     outputLog.innerHTML = "";
     currentMode = "root";
-    await printSequence([`Welcome back, ${currentUsername}!`, ""]);
+    await printSequence([`Welcome ${currentUsername}!`, ""]);
   }
 });
 
