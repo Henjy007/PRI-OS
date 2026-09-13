@@ -21,7 +21,7 @@ const DOCUMENTS = {
     archivedOn: "13/09/19XX",
     content: [
       { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
-      { type: "text", value: "TITLE - PLACEHOLDER" },
+      { type: "text", value: "TITLE - ADVANCED TEST 002" },
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/ZpdKo9C.png", alt: "test_002-photo1" },
       { type: "pause", duration: 1000 },
@@ -34,8 +34,6 @@ const DOCUMENTS = {
       { type: "video", url: "https://medal.tv/games/imported-clips/clips/nwaU4cvIRV-0pP82T/embed" },
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/9m8Gmkc.png", alt: "test_002-photo5" },
-      { type: "pause", duration: 1000 },
-      { type: "text", value: "End of document." },
       { type: "text", value: " " }
     ]
   }
