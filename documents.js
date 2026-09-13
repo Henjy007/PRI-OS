@@ -35,7 +35,7 @@ const DOCUMENTS = {
       { type: "image", url: "https://i.imgur.com/sXY3S6f.png", alt: "test_002-photo4" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
-      { type: "video", url: "https://medal.tv/games/imported-clips/clips/nwaU4cvIRV-0pP82T/embed" },
+      { type: "video", url: "https://medal.tv/clip/nwaU4cvIRV-0pP82T/embed" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/9m8Gmkc.png", alt: "test_002-photo5" },
