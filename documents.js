@@ -17,8 +17,8 @@ const DOCUMENTS = {
     ]
   },
   
-  "placeholder": {
-    archivedOn: "12/09/19XX",
+  "test_002": {
+    archivedOn: "13/09/19XX",
     content: [
       { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
       { type: "text", value: "TITLE - PLACEHOLDER" },
