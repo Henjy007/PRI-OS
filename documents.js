@@ -24,14 +24,19 @@ const DOCUMENTS = {
       { type: "text", value: "TITLE - ADVANCED TEST 002" },
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/ZpdKo9C.png", alt: "test_002-photo1" },
+      { type: "text", value: " " }
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/W4JRknt.png", alt: "test_002-photo2" },
+      { type: "text", value: " " }
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/S35rw32.png", alt: "test_002-photo3" },
+      { type: "text", value: " " }
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/sXY3S6f.png", alt: "test_002-photo4" },
+      { type: "text", value: " " }
       { type: "pause", duration: 1000 },
       { type: "video", url: "https://medal.tv/games/imported-clips/clips/nwaU4cvIRV-0pP82T/embed" },
+      { type: "text", value: " " }
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/9m8Gmkc.png", alt: "test_002-photo5" },
       { type: "text", value: " " }
