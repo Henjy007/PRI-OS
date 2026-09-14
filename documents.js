@@ -32,7 +32,7 @@ const DOCUMENTS = {
       { type: "image", url: "https://i.imgur.com/MI6atWg.jpeg", alt: "test_002-photo3" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
-      { type: "image", url: "https://i.imgur.com/sXY3S6f.png", alt: "test_002-photo4" },
+      { type: "image", url: "https://i.imgur.com/dwOXwhr.jpeg", alt: "test_002-photo4" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
       { type: "video", url: "https://medal.tv/clip/nwaU4cvIRV-0pP82T/embed" },
