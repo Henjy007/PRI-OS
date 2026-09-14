@@ -23,7 +23,7 @@ const DOCUMENTS = {
       { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
       { type: "text", value: "TITLE - ADVANCED TEST 002" },
       { type: "pause", duration: 1000 },
-      { type: "image", url: "https://i.imgur.com/wpMEy8p.jpeg", alt: "test_002-photo1" },
+      { type: "image", url: "https://i.imgur.com/1TqcgWa.jpeg", alt: "test_002-photo1" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
       { type: "image", url: "https://i.imgur.com/dbXVSNW.jpeg", alt: "test_002-photo2" },
