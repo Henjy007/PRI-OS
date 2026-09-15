@@ -32,7 +32,7 @@ const DOCUMENTS = {
       { type: "image", url: "https://i.postimg.cc/yWNxJQJH/PRI-Advanced-test-002-images-2.jpg", alt: "test_002-photo3" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
-      { type: "image", url: "https://i.postimg.cc/Cd61bG8Q/PRI-Advanced-test-002-images-3.jpg", alt: "test_002-photo4" },
+      { type: "image", url: "https://i.postimg.cc/TYTDMQ3f/PRI-Advanced-test-002-images-3.jpg", alt: "test_002-photo4" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
       { type: "video", url: "https://medal.tv/clip/nwaU4cvIRV-0pP82T/embed" },
