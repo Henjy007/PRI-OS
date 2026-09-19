@@ -77,4 +77,31 @@ const DOCUMENTS = {
     ]
   },
 
+"test_004": {
+    archivedOn: "19/09/19XX",
+    content: [
+      { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
+      { type: "text", value: "TITLE - ADVANCED TEST 004" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.ibb.co/601XqX6H/PRI-Advanced-test-004-images-0.jpg", alt: "test_004-photo1" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.ibb.co/XrLsf017/PRI-Advanced-test-004-images-1.jpg", alt: "test_004-photo2" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.ibb.co/JWnLB3My/PRI-Advanced-test-004-images-2.jpg", alt: "test_004-photo3" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.ibb.co/xnhhKx5/PRI-Advanced-test-004-images-3.jpg", alt: "test_004-photo4" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 1000 },
+      { type: "video", url: "https://medal.tv/clip/nyGlmza2B8OFiVPCu/embed" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 250 },
+      { type: "text", value: "End of document." },
+      { type: "text", value: " " }
+    ]
+  },
+  
 }
