@@ -128,6 +128,7 @@ const DOCUMENTS = {
       { type: "pause", duration: 750 },
       { type: "text", value: "img_001" },
       { type: "image", url: "https://i.ibb.co/VpQ2nKB4/image.png", alt: "test_005/img_001" },
+      { type: "text", value: " " },
       { type: "pause", duration: 250 },
       { type: "text", value: "End of document." },
       { type: "text", value: " " }
