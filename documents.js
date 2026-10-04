@@ -96,7 +96,7 @@ const DOCUMENTS = {
       { type: "image", url: "https://i.ibb.co/xnhhKx5/PRI-Advanced-test-004-images-3.jpg", alt: "test_004-photo4" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
-      { type: "video", url: "https://medal.tv/clip/nyGlmza2B8OFiVPCu/embed" },
+      { type: "video", url: "https://medal.tv/clip/nERPHbRMzZQB3CJds/embed" },
       { type: "text", value: " " },
       { type: "pause", duration: 250 },
       { type: "text", value: "End of document." },
