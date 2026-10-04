@@ -12,7 +12,7 @@ const DOCUMENTS = {
       { type: "image", url: "https://i.ibb.co/6RP7CH2n/Screenshot-2026-09-15-160006.png", alt: "test_001-photo1" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
-      { type: "video", url: "https://medal.tv/clip/nvnogn9UZwgK_ya89/embed" },
+      { type: "video", url: "https://medal.tv/clip/nES3GE10Rn8WY_W9T/embed" },
       { type: "text", value: " " },
       { type: "pause", duration: 250 },
       { type: "text", value: "End of document." },
