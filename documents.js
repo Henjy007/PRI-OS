@@ -9,7 +9,7 @@ const DOCUMENTS = {
       { type: "text", value: "TITLE - BASIC TEST 001" },
       { type: "text", value: " " },
       { type: "pause", duration: 750 },
-      { type: "image", url: "https://i.ibb.co/6RP7CH2n/Screenshot-2026-09-15-160006.png", alt: "test_001-photo1" },
+      { type: "image", url: "https://i.postimg.cc/7Zm1Qd1y/Screenshot-2026-09-15-160006.png", alt: "test_001-photo1" },
       { type: "text", value: " " },
       { type: "pause", duration: 1000 },
       { type: "video", url: "https://medal.tv/clip/nES3GE10Rn8WY_W9T/embed" },
