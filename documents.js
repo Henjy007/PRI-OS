@@ -27,7 +27,7 @@ const DOCUMENTS = {
       { type: "text", value: "TITLE - ADVANCED TEST 002" },
       { type: "text", value: " " },
       { type: "pause", duration: 750 },
-      { type: "image", url: "https://i.postimg.cc/pdL3kF7j/PRI-Advanced-test-002-images-0.jpg", alt: "test_002-photo1" },
+      { type: "image", url: "https://i.postimg.cc/66nbrcqw/PRI-Advanced-test-002-images-0.jpg", alt: "test_002-photo1" },
       { type: "text", value: " " },
       { type: "pause", duration: 750 },
       { type: "image", url: "https://i.postimg.cc/dtQ32W6j/PRI-Advanced-test-002-images-1.jpg", alt: "test_002-photo2" },
