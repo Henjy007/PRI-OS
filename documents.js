@@ -161,5 +161,51 @@ const DOCUMENTS = {
       { type: "text", value: " " }
     ]
   },
+
+  "test_007": {
+    archivedOn: "15/11/19XX",
+    content: [
+      { type: "text", value: "PARAGON RESEARCH INSTITUTE - UNCLASSIFIED RECORD" },
+      { type: "text", value: "TITLE - ADVANCED TEST 007" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.postimg.cc/rFJDr6LG/PRI-Advanced-test-007-images-0.jpg", alt: "test_007-photo1" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.postimg.cc/PJDmjSLW/PRI-Advanced-test-007-images-1.jpg", alt: "test_007-photo2" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.postimg.cc/KjTn20KD/PRI-Advanced-test-007-images-2.jpg", alt: "test_007-photo3" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.postimg.cc/7hzgkKCN/PRI-Advanced-test-007-images-3.jpg", alt: "test_007-photo4" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "image", url: "https://i.postimg.cc/GtDkCXBP/PRI-Advanced-test-007-images-4.jpg", alt: "test_007-photo5" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 1000 },
+      { type: "video", url: "https://medal.tv/clip/nW9IhjtkicmpVpR7J/embed" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "text", value: "img_001" },
+      { type: "image", url: "https://i.postimg.cc/1XK3wF2L/image1.png", alt: "test_007/img_001" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "text", value: "img_002" },
+      { type: "image", url: "https://i.postimg.cc/T1c3gbBM/image2.png", alt: "test_007/img_002" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "text", value: "img_003" },
+      { type: "image", url: "https://i.postimg.cc/fyvRmd14/image3.png", alt: "test_007/img_003" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 750 },
+      { type: "text", value: "img_004" },
+      { type: "image", url: "https://i.postimg.cc/VvFknt2c/image4.png", alt: "test_007/img_004" },
+      { type: "text", value: " " },
+      { type: "pause", duration: 250 },
+      { type: "text", value: "End of document." },
+      { type: "text", value: " " }
+    ]
+  },
   
 }
